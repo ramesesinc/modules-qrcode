@@ -25,6 +25,13 @@ class QrCodeInfoService {
 	}
 
 	@ProxyMethod
+	public def getData(params) {
+		def retval = encode(params);
+		def host = params.host ? params.host : 'https://www.filipizen.com';
+		return host + '/qr?data=' + retval.data;
+	}
+
+	@ProxyMethod
 	public def decode(params) {
 		if (!params.data) throw new Exception('data must be specified');
 		def len = params.data.length();
